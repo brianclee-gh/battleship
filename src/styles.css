@@ -1,0 +1,85 @@
+ul li {
+    list-style-type: none;
+    margin: 0.2rem;
+}
+
+#ship-sidebar {
+    border: 1px solid black;
+}
+
+#ship-selector li:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.carrier,
+.battleship,
+.destroyer,
+.submarine,
+.patrol_boat {
+    background-color: blue
+}
+
+.placed {
+    visibility: hidden;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+
+.game-container {
+    display: flex;
+}
+
+.ship-sidebar {
+    flex: 1;
+}
+
+.player-board,
+.computer-board {
+    border: 2px solid black;
+    flex: 4;
+}
+
+.player-grid,
+.computer-grid {
+    display: flex;
+    flex-direction: row;
+    width: 22rem;
+    flex-wrap: wrap;
+}
+
+.grid-cell {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid black;
+}
+
+
+
+#board {
+    border: 1px solid black;
+    position: relative;
+    width: 1024px;
+    height: 863px;
+    margin: auto;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+/* body {
+    color: white;
+    background-color: black;
+} */

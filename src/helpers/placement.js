@@ -65,14 +65,17 @@ const Placement = (player, gameboard) => {
     const hidePlacement = () => {
         const shipSelector = document.getElementById('ship-selector');
         const startBtn = document.getElementById('startBtn');
+        const autoplaceBtn = document.getElementById('autoplaceBtn')
 
         shipSelector.classList.toggle('hidden');
         startBtn.classList.toggle('hidden');
+        autoplaceBtn.classList.toggle('hidden');
     }
 
 
     return {
         placementActive,
+        hidePlacement,
     }
 
 }

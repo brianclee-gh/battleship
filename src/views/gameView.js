@@ -52,9 +52,15 @@ const gameView = (() => {
 
     };
 
+    const renderWinner = (winner) => {
+        const message = document.getElementById('message')
+        message.innerHTML = winner;
+    }
+
     return {
         renderGrid,
         renderShipSelector,
+        renderWinner,
     }
 
 })();

@@ -15,9 +15,7 @@ const Game = () => {
 
     const placement = Placement(player1, player1Board);
 
-    const startGame = document.getElementById('startBtn')
-
-    startGame.addEventListener('click', e => { console.log('ready to start!') })
+    const winner = '';
 
     const isGameOver = () => {
         //check if either player or computer gameBoards are all sunk
@@ -31,13 +29,13 @@ const Game = () => {
     };
 
     const initialize = () => {
-        renderPlayerBoard();
+        renderGrids();
         gameView.renderShipSelector(player1.getRoster());
         addBoardListeners();
         placement.placementActive();
     };
 
-    const renderPlayerBoard = () => {
+    const renderGrids = () => {
         const playerGrid = document.querySelector('.player-grid');
         const computerGrid = document.querySelector('.computer-grid');
         gameView.renderGrid(playerGrid, player1Board);
@@ -45,10 +43,26 @@ const Game = () => {
     }
 
     const addBoardListeners = () => {
-        // const playerGrid = document.querySelector('.player-grid');
-        // playerGrid.addEventListener('click', handleGridClick);
+        const startBtn = document.getElementById('startBtn');
+        startBtn.addEventListener('click', startGame);
 
+        const autoplaceBtn = document.getElementById('autoplaceBtn');
+        autoplaceBtn.addEventListener('click', playerAutoplace);
+    }
+
+    const playerAutoplace = () => {
+        player1Board.autoPlaceRoster(player1.getRoster());
+        console.log(player1Board);
+        const playerGrid = document.querySelector('.player-grid');
+        gameView.renderGrid(playerGrid, player1Board);
+        placement.hidePlacement();
+    }
+
+    const startGame = () => {
         const computerGrid = document.querySelector('.computer-grid');
+
+        computerBoard.autoPlaceRoster(computer.getRoster());
+        gameView.renderGrid(computerGrid, computerBoard);
         computerGrid.addEventListener('click', handleGridClick);
     }
 
@@ -56,17 +70,38 @@ const Game = () => {
         const targetCell = e.target;
 
         if (targetCell.classList.contains('grid-cell')) {
-            const y = targetCell.dataset.y;
-            const x = targetCell.dataset.x;
+            const y = parseInt(targetCell.dataset.y);
+            const x = parseInt(targetCell.dataset.x);
 
-            console.log([y, x])
+            const boardCell = computerBoard.getBoard()[y][x]
+
+            if (boardCell !== 'hit' || boardCell !== 'miss') {
+                computerBoard.receiveAttack(y, x);
+                // computer take shot
+                renderGrids();
+            }
+
+            console.log(computerBoard.allShipsSunk())
+
+            if (player1Board.allShipsSunk() || computerBoard.allShipsSunk()) {
+                let winner = '';
+                if (player1Board.allShipsSunk()) {
+                    winner = 'computer';
+                } else {
+                    winner = 'player'
+                }
+                gameView.renderWinner(winner);
+
+            }
+
+            //remove gamelisteners 
+            //play again button?
+
+
+
         }
     }
     
-
-    const updateDisplay = () => {
-        const message = document.getElementById('message')
-    }
 
     const resetGame = () => {
         player1.resetRoster();

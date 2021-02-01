@@ -12,11 +12,11 @@ ul li {
     color: red;
 }
 
-.carrier,
-.battleship,
-.destroyer,
-.submarine,
-.patrol_boat {
+div.player-grid > .carrier,
+div.player-grid > .battleship,
+div.player-grid > .destroyer,
+div.player-grid > .submarine,
+div.player-grid > .patrol_boat {
     background-color: blue
 }
 
@@ -26,6 +26,14 @@ ul li {
 
 .hidden {
     visibility: hidden;
+}
+
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: green;
 }
 
 .bold {

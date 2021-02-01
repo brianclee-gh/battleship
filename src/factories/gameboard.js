@@ -28,6 +28,31 @@ function Gameboard() {
 
     };
 
+    const autoPlace = (ship) => {
+        const [y, x] = randomCoordinates();
+        const changeOrientation = Math.random() > 0.5;
+        if (changeOrientation) ship.changeOrientation();
+
+        const isValid = placeShip(y, x, ship);
+        if (!isValid) autoPlace(ship);
+    }
+
+    const autoPlaceRoster = (roster) => {
+        for (let ship in roster) {
+            autoPlace(roster[ship]);
+        }
+    }
+
+    const randomCoordinates = () => {
+        const min = 0;
+        const max = 9;
+
+        const y = Math.floor(Math.random() * (max - min + 1)) + min
+        const x = Math.floor(Math.random() * (max - min + 1)) + min
+
+        return [y, x]
+    }
+
     const translateCoords = (yInitial, xInitial, i, orientation) => {
 
         let x = xInitial + i;
@@ -73,7 +98,9 @@ function Gameboard() {
         return board[y][x];
     }
 
-    const allShipsSunk = () => {placedShips.every((ship) => ship.isSunk())};
+    const allShipsSunk = () => { 
+        return placedShips.every((ship) => ship.isSunk()) 
+    };
 
     const resetBoard = () => {
         board = Array(10).fill(null).map(() => Array(10).fill(null));
@@ -84,6 +111,7 @@ function Gameboard() {
     return {
         getBoard,
         placeShip,
+        autoPlaceRoster,
         allShipsPlaced,
         receiveAttack,
         allShipsSunk,

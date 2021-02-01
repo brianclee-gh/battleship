@@ -3,9 +3,9 @@ const Ship = (name, length) => {
 
     const getOrientation = () => orientation;
     const changeOrientation = () => {
-        direction == 'horizontal' ?
-            (direction = 'vertical') :
-            (direction = 'horizontal');
+        orientation == 'horizontal' ?
+        (orientation = 'vertical') :
+        (orientation = 'horizontal');
     };
 
     const hitPoints = Array(length).fill(null);
@@ -17,7 +17,7 @@ const Ship = (name, length) => {
     const getHitPoints = () => hitPoints;
 
     const isSunk = () => {
-        hitPoints.every(r => r === "hit");
+        return hitPoints.every(r => r === "hit");
     }
 
     return {
